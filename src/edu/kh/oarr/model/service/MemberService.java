@@ -73,6 +73,8 @@ public class MemberService {
 				break;
 			case 5:
 				System.out.println(search());
+//				System.out.println(searchRegion());
+				break;
 			case 0:
 				System.out.println("프로그램 종료");
 				break;
@@ -193,15 +195,19 @@ public class MemberService {
 					loginMember = memberArr[i]; 
 					
 					return loginMember.getMemberName() + "님, 환영합니다!\n";
+					// break; //  더 이상 같은 아이디, 비밀번호가 없기 때문에 for문 종료
 				}
 			}
 			return "로그인 실패!\n아이디와 비밀번호 다시 확인해주세요.\n";
-		}
-			
+		}		
 	}
+	
+	
+	// 2-2)  선생님 풀이도 한번 더 참고해서 보기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	// 3) 정보 조회 메서드
 	public String selectMember() {
+
 	
 		System.out.println("\n***** 회원 정보 조회 ***** ");
 		
@@ -212,12 +218,14 @@ public class MemberService {
 		String str = "이름 : " + loginMember.getMemberName();
 		str += "\n아이디 : " + loginMember.getMemberId();
 		str += "\n나이 : " + loginMember.getMemberAge() +"세";
+		str += "\n지역 : " + loginMember.getRegion();
 
 		return str;
 	}
 
 	// 4) 회원 정보 수정
 	public int updateMember() {
+
 		System.out.println("\n***** 회원 정보 수정 ***** ");
 		
 		
@@ -233,6 +241,9 @@ public class MemberService {
 		
 		System.out.print("수정할 나이 입력 : ");
 		int inputAge = sc.nextInt();
+		
+		System.out.print("수정할 지역 입력 : ");
+		String inputRegion = sc.next();
 
 		
 		// 2-2) 비밀번호를 입력받아서 로그인한 회원의 비밀번호와 일치하는지 확인
@@ -247,6 +258,7 @@ public class MemberService {
 			
 			loginMember.setMemberName(inputName);
 			loginMember.setMemberAge(inputAge);
+			loginMember.setRegion(inputRegion);
 			
 			return 1;
 		}else { // 비밀번호가 다른 경우 0 반환
@@ -258,6 +270,8 @@ public class MemberService {
 	// 5) 회원 검색 ( 지역 ) 
 	
 	public String search() {
+		
+		System.out.println("\n ====== 회원 검색 (지역) ======");
 		
 		System.out.print("찾을 지역 : ");
 		String inputRegion = sc.next();
@@ -287,6 +301,46 @@ public class MemberService {
 	
 	
 	
+	// 5-2) 회원 검색(지역) 메서드 ( 선생님 ) 
+/*	public void searchRegion( ) {
+		
+		System.out.println("\n ====== 회원 검색 (지역) ======");
+		
+		System.out.println("검색할 지역을 입력하세요 : ");
+		String inputRegion2 = sc.next();
+		
+		boolean flag = true; // 검색 결과 신호용 변수
+		
+		// 1) memberArr 배열의 모든 요소 순차 접근
+		for ( int i = 0; i < memberArr.length; i++) {
+			
+			// 2) memberArr[i] 요소가 null인 경우 반복 종료
+			
+			if(memberArr[i] == null) {
+				break;
+			}
+			
+			// 3) memberArr[i] 요소에 저장된 지역(region)이 
+			//   입력 받은 지역 (inputRegion2)와 같을 경우
+			//   회원의 아이디, 이름을 출력
+			
+			if(memberArr[i].getRegion().equals(inputRegion2)) {
+				
+				System.out.printf("아이디 : %s, 이름 : %s\n",
+								memberArr[i].getMemberId(), memberArr[i].getMemberName()
+						);
+				flag = false;
+			}
+		}
+		
+		
+		if(flag) {			
+			System.out.println("일치하는 검색 결과가 없습니다.");			
+		}
+		
+		
+		
+	}*/
 	
 	
 	
